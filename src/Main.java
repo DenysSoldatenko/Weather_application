@@ -5,6 +5,6 @@ import javax.swing.SwingUtilities;
  */
 public class Main {
   public static void main(String[] args) {
-    SwingUtilities.invokeLater(() -> new WeatherAppGui().setVisible(true));
+    SwingUtilities.invokeLater(() -> new WeatherApplication().setVisible(true));
   }
 }
