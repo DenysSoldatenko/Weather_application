@@ -1,6 +1,7 @@
-package utils;
+package handlers;
 
 import static java.util.Objects.requireNonNull;
+import static providers.WeatherDataProvider.getWeatherData;
 import static utils.ImageLoader.loadImage;
 
 import javax.swing.JLabel;
@@ -28,7 +29,7 @@ public class WeatherDataHandler {
       return;
     }
 
-    JSONObject weatherData = WeatherApp.getWeatherData(userInput);
+    JSONObject weatherData = getWeatherData(userInput);
     String weatherCondition = (String) requireNonNull(weatherData).get("weather_condition");
 
     switch (weatherCondition) {

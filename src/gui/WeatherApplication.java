@@ -1,9 +1,11 @@
+package gui;
+
+import static handlers.WeatherDataHandler.updateWeatherDisplay;
 import static java.awt.Cursor.getPredefinedCursor;
 import static java.awt.Font.BOLD;
 import static java.awt.Font.PLAIN;
 import static javax.swing.SwingConstants.CENTER;
 import static utils.ImageLoader.loadImage;
-import static utils.WeatherDataHandler.updateWeatherDisplay;
 
 import java.awt.Cursor;
 import java.awt.Font;

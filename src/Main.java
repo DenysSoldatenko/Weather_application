@@ -1,3 +1,4 @@
+import gui.WeatherApplication;
 import javax.swing.SwingUtilities;
 
 /**
