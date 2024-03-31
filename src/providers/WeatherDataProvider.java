@@ -1,15 +1,15 @@
 package providers;
 
+import static java.net.URI.create;
 import static java.util.Objects.requireNonNull;
+import static java.util.logging.Level.SEVERE;
 import static parsers.WeatherDataParser.parseWeatherData;
 import static providers.LocationDataProvider.getLocationData;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -40,10 +40,10 @@ public class WeatherDataProvider {
       if (connection.getResponseCode() == 200) {
         return parseApiResponse(connection);
       } else {
-        LOGGER.log(Level.SEVERE, "Error: Could not connect to weather API");
+        LOGGER.log(SEVERE, "Error: Could not connect to weather API");
       }
     } catch (IOException | ParseException e) {
-      LOGGER.log(Level.SEVERE, "Error while fetching weather data", e);
+      LOGGER.log(SEVERE, "Error while fetching weather data", e);
     }
     return null;
   }
@@ -57,7 +57,7 @@ public class WeatherDataProvider {
   }
 
   private static HttpURLConnection fetchApiConnection(String apiUrl) throws IOException {
-    URL url = URI.create(apiUrl).toURL();
+    URL url = create(apiUrl).toURL();
     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     connection.setRequestMethod("GET");
     connection.connect();

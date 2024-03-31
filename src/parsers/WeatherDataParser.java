@@ -1,5 +1,8 @@
 package parsers;
 
+import static java.time.LocalDateTime.now;
+import static java.time.format.DateTimeFormatter.ofPattern;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.json.simple.JSONArray;
@@ -22,7 +25,6 @@ public class WeatherDataParser {
   public static JSONObject parseWeatherData(String jsonData) throws ParseException {
     JSONParser parser = new JSONParser();
     JSONObject resultJsonObj = (JSONObject) parser.parse(jsonData);
-
     JSONObject hourlyData = (JSONObject) resultJsonObj.get("hourly");
 
     JSONArray timeList = (JSONArray) hourlyData.get("time");
@@ -50,8 +52,8 @@ public class WeatherDataParser {
   }
 
   private static int findIndexOfCurrentTime(JSONArray timeList) {
-    LocalDateTime currentDateTime = LocalDateTime.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH':00'");
+    LocalDateTime currentDateTime = now();
+    DateTimeFormatter formatter = ofPattern("yyyy-MM-dd'T'HH':00'");
     String currentTime = currentDateTime.format(formatter);
 
     for (int i = 0; i < timeList.size(); i++) {

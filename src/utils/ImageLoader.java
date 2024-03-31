@@ -1,11 +1,12 @@
 package utils;
 
+import static java.util.logging.Level.WARNING;
+import static javax.imageio.ImageIO.read;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
@@ -22,10 +23,10 @@ public class ImageLoader {
   */
   public static ImageIcon loadImage(String resourcePath) {
     try {
-      BufferedImage image = ImageIO.read(new File(resourcePath));
+      BufferedImage image = read(new File(resourcePath));
       return new ImageIcon(image);
     } catch (IOException e) {
-      logger.log(Level.WARNING, "Failed to load image: " + resourcePath, e);
+      logger.log(WARNING, "Failed to load image: " + resourcePath, e);
       return null;
     }
   }

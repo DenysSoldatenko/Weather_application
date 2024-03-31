@@ -22,9 +22,11 @@ public class WeatherDataHandler {
    * @param humidityLabel         the JLabel for displaying humidity
    * @param windSpeedLabel        the JLabel for displaying wind speed
    */
-  public static void updateWeatherDisplay(String userInput, JLabel weatherConditionImage,
-                                          JLabel temperatureLabel, JLabel weatherConditionLabel,
-                                          JLabel humidityLabel, JLabel windSpeedLabel) {
+  public static void updateWeatherDisplay(
+      String userInput, JLabel weatherConditionImage,
+      JLabel temperatureLabel, JLabel weatherConditionLabel,
+      JLabel humidityLabel, JLabel windSpeedLabel
+  ) {
     if (isInputEmpty(userInput)) {
       return;
     }

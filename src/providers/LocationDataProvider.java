@@ -1,11 +1,12 @@
 package providers;
 
+import static java.net.URI.create;
+import static java.util.logging.Level.SEVERE;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -29,7 +30,7 @@ public class LocationDataProvider {
       HttpURLConnection connection = fetchApiResponse(apiUrl);
 
       if (connection.getResponseCode() != 200) {
-        logger.log(Level.SEVERE, "Error: Could not connect to the location API");
+        logger.log(SEVERE, "Error: Could not connect to the location API");
         return null;
       }
 
@@ -47,7 +48,7 @@ public class LocationDataProvider {
 
       return (JSONArray) resultsJson.get("results");
     } catch (Exception e) {
-      logger.log(Level.SEVERE, "Error fetching location data: " + e.getMessage(), e);
+      logger.log(SEVERE, "Error fetching location data: " + e.getMessage(), e);
     }
 
     return null;
@@ -60,7 +61,7 @@ public class LocationDataProvider {
   }
 
   private static HttpURLConnection fetchApiResponse(String apiUrl) throws IOException {
-    URL url = URI.create(apiUrl).toURL();
+    URL url = create(apiUrl).toURL();
     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     connection.setRequestMethod("GET");
     connection.connect();
