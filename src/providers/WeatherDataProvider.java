@@ -2,7 +2,6 @@ package providers;
 
 import static java.net.URI.create;
 import static java.util.Objects.requireNonNull;
-import static java.util.logging.Level.SEVERE;
 import static parsers.WeatherDataParser.parseWeatherData;
 import static providers.LocationDataProvider.getLocationData;
 
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -18,9 +17,8 @@ import org.json.simple.parser.ParseException;
 /**
  * Utility class for fetching weather data from an external API.
  */
+@Slf4j
 public class WeatherDataProvider {
-
-  private static final Logger LOGGER = Logger.getLogger(WeatherDataProvider.class.getName());
 
   /**
    * Retrieves weather data for the specified location.
@@ -40,10 +38,10 @@ public class WeatherDataProvider {
       if (connection.getResponseCode() == 200) {
         return parseApiResponse(connection);
       } else {
-        LOGGER.log(SEVERE, "Error: Could not connect to weather API");
+        log.error("Error: Could not connect to weather API. Response code: {}", connection.getResponseCode());
       }
     } catch (IOException | ParseException e) {
-      LOGGER.log(SEVERE, "Error while fetching weather data", e);
+      log.error("Error while fetching weather data", e);
     }
     return null;
   }
@@ -64,8 +62,7 @@ public class WeatherDataProvider {
     return connection;
   }
 
-  private static JSONObject parseApiResponse(HttpURLConnection connection)
-      throws IOException, ParseException {
+  private static JSONObject parseApiResponse(HttpURLConnection connection) throws IOException, ParseException {
     StringBuilder responseBuilder = new StringBuilder();
     try (Scanner scanner = new Scanner(connection.getInputStream())) {
       while (scanner.hasNext()) {

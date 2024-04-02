@@ -78,7 +78,7 @@ public class WeatherDataParser {
     } else if (weatherCode > 0L && weatherCode <= 3L) {
       return "Cloudy";
     } else if ((weatherCode >= 51L && weatherCode <= 67L)
-        || (weatherCode >= 80L && weatherCode <= 99L)) {
+                || (weatherCode >= 80L && weatherCode <= 99L)) {
       return "Rain";
     } else if (weatherCode >= 71L && weatherCode <= 77L) {
       return "Snow";

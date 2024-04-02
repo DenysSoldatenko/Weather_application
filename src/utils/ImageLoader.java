@@ -1,6 +1,5 @@
 package utils;
 
-import static java.util.logging.Level.WARNING;
 import static javax.imageio.ImageIO.read;
 
 import java.awt.image.BufferedImage;
@@ -8,12 +7,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * A utility class to load images from files into ImageIcons.
  */
+@Slf4j
 public class ImageLoader {
-  private static final Logger logger = Logger.getLogger(ImageLoader.class.getName());
 
   /**
   * Loads an image from the specified file path and returns it as an ImageIcon.
@@ -26,7 +26,7 @@ public class ImageLoader {
       BufferedImage image = read(new File(resourcePath));
       return new ImageIcon(image);
     } catch (IOException e) {
-      logger.log(WARNING, "Failed to load image: " + resourcePath, e);
+      log.error("Failed to load image: {}", resourcePath, e);
       return null;
     }
   }

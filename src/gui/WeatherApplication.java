@@ -77,10 +77,12 @@ public class WeatherApplication extends JFrame {
     JButton searchButton = new JButton(loadImage("external/photos/search.png"));
     searchButton.setCursor(getPredefinedCursor(Cursor.HAND_CURSOR));
     searchButton.setBounds(375, 13, 47, 45);
-    searchButton.addActionListener(e -> updateWeatherDisplay(
-        searchTextField.getText(), weatherConditionLabel,
-        temperatureLabel, weatherConditionDesc,
-        humidityText, windSpeedText)
+    searchButton.addActionListener(
+        e -> updateWeatherDisplay(
+          searchTextField.getText(), weatherConditionLabel,
+          temperatureLabel, weatherConditionDesc,
+          humidityText, windSpeedText
+        )
     );
     add(searchButton);
   }

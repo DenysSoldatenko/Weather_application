@@ -1,13 +1,12 @@
 package providers;
 
 import static java.net.URI.create;
-import static java.util.logging.Level.SEVERE;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,8 +14,8 @@ import org.json.simple.parser.JSONParser;
 /**
  * Utility class for fetching location data from an external API.
  */
+@Slf4j
 public class LocationDataProvider {
-  private static final Logger logger = Logger.getLogger(LocationDataProvider.class.getName());
 
   /**
    * Retrieves location data from the API for the specified location name.
@@ -30,7 +29,7 @@ public class LocationDataProvider {
       HttpURLConnection connection = fetchApiResponse(apiUrl);
 
       if (connection.getResponseCode() != 200) {
-        logger.log(SEVERE, "Error: Could not connect to the location API");
+        log.error("Error: Could not connect to the location API. Response code: " + connection.getResponseCode());
         return null;
       }
 
@@ -48,7 +47,7 @@ public class LocationDataProvider {
 
       return (JSONArray) resultsJson.get("results");
     } catch (Exception e) {
-      logger.log(SEVERE, "Error fetching location data: " + e.getMessage(), e);
+      log.error("Error fetching location data: " + e.getMessage(), e);
     }
 
     return null;
