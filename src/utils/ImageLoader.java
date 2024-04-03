@@ -5,7 +5,6 @@ import static javax.imageio.ImageIO.read;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import lombok.extern.slf4j.Slf4j;
 

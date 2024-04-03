@@ -29,7 +29,7 @@ public class LocationDataProvider {
       HttpURLConnection connection = fetchApiResponse(apiUrl);
 
       if (connection.getResponseCode() != 200) {
-        log.error("Error: Could not connect to the location API. Response code: " + connection.getResponseCode());
+        log.error("Error: Could not connect to the location API. Response code: {}", connection.getResponseCode());
         return null;
       }
 
@@ -47,7 +47,7 @@ public class LocationDataProvider {
 
       return (JSONArray) resultsJson.get("results");
     } catch (Exception e) {
-      log.error("Error fetching location data: " + e.getMessage(), e);
+      log.error("Error fetching location data: {}", e.getMessage(), e);
     }
 
     return null;
